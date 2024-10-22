@@ -1,21 +1,20 @@
-# backend/Dockerfile
-# Use the official Python image as a base image
-FROM python:3.10
+# Use official Python image as a base
+FROM python:3.10-slim
 
-# Set the working directory
+# Set the working directory inside the container
 WORKDIR /app
 
-# Copy the requirements file
-COPY ./requirements.txt .
+# Copy the requirements file to the working directory
+COPY requirements.txt .
 
-# Install dependencies, including dotenv
+# Install the Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the project files
+# Copy the entire backend folder to the working directory
 COPY . .
 
-# Expose the port the app runs on
+# Expose the port Django runs on
 EXPOSE 8000
 
-# Run the application
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Run migrations, collect static files, and start the Django app
+CMD ["sh", "-c", "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]

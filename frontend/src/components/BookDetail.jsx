@@ -1,4 +1,4 @@
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styles from './BookDetail.module.css';
@@ -19,6 +19,19 @@ const BookDetail = () => {
     };
     fetchBookDetails();
   }, [id]);
+
+
+  const handleDelete = async () => {
+    const confirmDelete = window.confirm('Are you sure you want to delete this book?');
+    if (confirmDelete) {
+      try {
+        await axios.delete(`http://localhost:8000/api/books/${id}/`);
+        navigate('/'); 
+      } catch (error) {
+        console.error('Error deleting the book:', error);
+      }
+    }
+  };
 
   if (!book) {
     return <div className={styles.loading}>Loading...</div>;
@@ -54,9 +67,14 @@ const BookDetail = () => {
         >
           Back to List
         </button>
+        <button
+          onClick={handleDelete}
+          className={styles.deleteButton}
+        >
+          Delete Book
+        </button>
       </div>
     </div>
   );
 };
-
 export default BookDetail;

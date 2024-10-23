@@ -1,7 +1,6 @@
 /* BookList.module.css */
 .header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     margin-bottom: 2rem;
   }
@@ -13,6 +12,7 @@
   }
   
   .addButton {
+    margin-left: 20px;
     background-color: #3b82f6;
     color: white;
     padding: 0.5rem 1rem;
@@ -22,6 +22,7 @@
   }
   
   .addButton:hover {
+    color: white;
     background-color: #2563eb;
   }
   

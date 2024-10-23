@@ -83,11 +83,11 @@ WSGI_APPLICATION = 'book_review_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('POSTGRES_NAME'),
-        'USER': os.environ.get('POSTGRES_USER'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
-        'HOST': os.environ.get('POSTGRES_HOST', 'db'),
-        'PORT': os.environ.get('POSTGRES_PORT', '5432'),
+        'NAME': 'book_review_db',
+        'USER': 'bookuser',
+        'PASSWORD':  '9513',
+        'HOST': '127.0.0.1', 
+        'PORT': '5432',
     }
 }
 

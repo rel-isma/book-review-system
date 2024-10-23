@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import styles from './BookForm.module.css';
 
 const BookForm = () => {
   const { id } = useParams();
@@ -45,50 +46,70 @@ const BookForm = () => {
   };
 
   return (
-    <div>
-      <h2>{id ? 'Edit Book' : 'Add New Book'}</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="title">Title:</label>
+    <div className={styles.container}>
+      <h2 className={styles.title}>
+        {id ? 'Edit Book' : 'Add New Book'}
+      </h2>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <div className={styles.formGroup}>
+          <label className={styles.label}>Title</label>
           <input
             type="text"
-            id="title"
             name="title"
             value={book.title}
             onChange={handleChange}
+            className={styles.input}
+            required
           />
         </div>
-        <div>
-          <label htmlFor="author">Author:</label>
+        <div className={styles.formGroup}>
+          <label className={styles.label}>Author</label>
           <input
             type="text"
-            id="author"
             name="author"
             value={book.author}
             onChange={handleChange}
+            className={styles.input}
+            required
           />
         </div>
-        <div>
-          <label htmlFor="publication_date">Publication Date:</label>
+        <div className={styles.formGroup}>
+          <label className={styles.label}>Publication Date</label>
           <input
             type="date"
-            id="publication_date"
             name="publication_date"
             value={book.publication_date}
             onChange={handleChange}
+            className={styles.input}
+            required
           />
         </div>
-        <div>
-          <label htmlFor="isbn">ISBN:</label>
+        <div className={styles.formGroup}>
+          <label className={styles.label}>ISBN</label>
           <input
             type="text"
-            id="isbn"
             name="isbn"
             value={book.isbn}
             onChange={handleChange}
+            className={styles.input}
+            required
           />
         </div>
-        <button type="submit">{id ? 'Update' : 'Create'}</button>
+        <div className={styles.buttonGroup}>
+          <button 
+            type="submit"
+            className={styles.primaryButton}
+          >
+            {id ? 'Update' : 'Create'}
+          </button>
+          <button 
+            type="button"
+            className={styles.secondaryButton}
+            onClick={() => navigate('/')}
+          >
+            Cancel
+          </button>
+        </div>
       </form>
     </div>
   );

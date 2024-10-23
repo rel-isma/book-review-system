@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import styles from './BookList.module.css';
 
 function BookList() {
   const [books, setBooks] = useState([]);
@@ -15,15 +16,22 @@ function BookList() {
 
   return (
     <div>
-      <h1>Book List</h1>
-      <Link to="/add-book">Add New Book</Link>
-      <ul>
+      <div className={styles.header}>
+        <h2 className={styles.headerTitle}>Book List</h2>
+        <Link to="/book/new" className={styles.addButton}>
+          Add New Book
+        </Link>
+      </div>
+      <div className={styles.grid}>
         {books.map(book => (
-          <li key={book.id}>
-            <Link to={`/book/${book.id}`}>{book.title}</Link>
-          </li>
+          <Link key={book.id} to={`/book/${book.id}`} className={styles.card}>
+            <div className={styles.cardContent}>
+              <h3 className={styles.cardTitle}>{book.title}</h3>
+              <p className={styles.cardAuthor}>{book.author}</p>
+            </div>
+          </Link>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

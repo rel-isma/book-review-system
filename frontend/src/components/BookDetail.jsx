@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import  { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import styles from './BookDetail.module.css';
 
 const BookDetail = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [book, setBook] = useState(null);
 
   useEffect(() => {
@@ -19,15 +21,40 @@ const BookDetail = () => {
   }, [id]);
 
   if (!book) {
-    return <div>Loading...</div>;
+    return <div className={styles.loading}>Loading...</div>;
   }
 
   return (
-    <div>
-      <h2>{book.title}</h2>
-      <p>Author: {book.author}</p>
-      <p>Publication Date: {book.publication_date}</p>
-      <p>ISBN: {book.isbn}</p>
+    <div className={styles.container}>
+      <h2 className={styles.title}>{book.title}</h2>
+      <div className={styles.grid}>
+        <div className={styles.field}>
+          <div className={styles.label}>Author</div>
+          <div className={styles.value}>{book.author}</div>
+        </div>
+        <div className={styles.field}>
+          <div className={styles.label}>Publication Date</div>
+          <div className={styles.value}>{book.publication_date}</div>
+        </div>
+        <div className={styles.field}>
+          <div className={styles.label}>ISBN</div>
+          <div className={styles.value}>{book.isbn}</div>
+        </div>
+      </div>
+      <div className={styles.buttonGroup}>
+        <button 
+          onClick={() => navigate(`/book/edit/${id}`)}
+          className={styles.primaryButton}
+        >
+          Edit Book
+        </button>
+        <button 
+          onClick={() => navigate('/')}
+          className={styles.secondaryButton}
+        >
+          Back to List
+        </button>
+      </div>
     </div>
   );
 };
